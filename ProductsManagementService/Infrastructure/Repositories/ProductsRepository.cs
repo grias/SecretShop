@@ -28,7 +28,8 @@ public class ProductsRepository : IProductsRepository
     public async Task<Product?> DeleteAsync(int id)
     {
         var ProductToDelete = await GetByIdAsync(id);
-        if (ProductToDelete is null)
+
+        if (ProductToDelete is null || ProductToDelete.Deleted)
         {
             return null;
         }
@@ -41,9 +42,9 @@ public class ProductsRepository : IProductsRepository
 
     public async Task<List<Product>> GetAllAsync(QueryObject queryObject)
     {
-        var books =  _context.Products.AsQueryable();
+        var products =  _context.Products.AsQueryable();
 
-        return await books
+        return await products
             .FilterNotDeleted()
             .FilterByName(queryObject)
             .FilterByOwnerId(queryObject)
@@ -54,6 +55,7 @@ public class ProductsRepository : IProductsRepository
     public async Task<Product?> GetByIdAsync(int id)
     {
         var product = await _context.Products.FindAsync(id);
+
         if (product is null || product.Deleted)
         {
             return null;
@@ -65,6 +67,7 @@ public class ProductsRepository : IProductsRepository
     public async Task<Product?> UpdateAsync(Product entity)
     {
         var productToUpdate = await GetByIdAsync(entity.Id);
+
         if (productToUpdate is null)
         {
             return null;
@@ -74,6 +77,7 @@ public class ProductsRepository : IProductsRepository
         productToUpdate.Description = entity.Description;
         productToUpdate.Price = entity.Price;
         productToUpdate.Available = entity.Available;
+
         await _context.SaveChangesAsync();
 
         return productToUpdate;

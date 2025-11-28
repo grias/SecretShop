@@ -1,8 +1,10 @@
-﻿namespace InnoShop.UsersManagementService.Domain.Interfaces.Repositories;
+﻿using InnoShop.UsersManagementService.Domain.Queries;
+
+namespace InnoShop.UsersManagementService.Domain.Interfaces.Repositories;
 
 public interface IRepository<TEntity> where TEntity : class
 {
-    Task<List<TEntity>> GetAllAsync();
+    Task<List<TEntity>> GetAllAsync(UserQueryObject queryObject);
 
     Task<TEntity?> GetByIdAsync(int id);
 

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using InnoShop.UsersManagementService.Application.Dtos;
+using InnoShop.UsersManagementService.Application.Dtos.Responses;
 
 namespace InnoShop.UsersManagementService.Application.Interfaces.Services;
 
-public interface IUserManagementService
+public interface IUsersService
 {
     Task<List<UserDto>> GetAllAsync();
 

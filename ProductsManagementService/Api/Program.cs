@@ -29,7 +29,6 @@ public class Program
         RegisterDbContext(builder);
 
         builder.Services.AddControllers();
-        // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.AddOpenApi();
 
         builder.Services.AddExceptionHandler<GeneralExceptionHandler>();

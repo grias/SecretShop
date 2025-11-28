@@ -1,8 +1,5 @@
 ﻿using InnoShop.ProductsManagementService.Domain.Entities;
 using InnoShop.ProductsManagementService.Domain.Queries;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace InnoShop.ProductsManagementService.Infrastructure.Helpers;
 

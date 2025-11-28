@@ -29,7 +29,7 @@ public class UpdateProductHandler : IRequestHandler<UpdateProductCommand, Produc
         }
 
         var productToUpdate = _mapper.Map(request.ProductDto, existingProduct);
-        var product = await _productsRepository.UpdateAsync(productToUpdate);
-        return _mapper.Map<ProductDto>(product);
+        var updatedProduct = await _productsRepository.UpdateAsync(productToUpdate);
+        return _mapper.Map<ProductDto>(updatedProduct);
     }
 }

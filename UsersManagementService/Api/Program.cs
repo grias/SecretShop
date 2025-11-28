@@ -1,4 +1,9 @@
-using InnoShop.UsersManagementService.Infrastructure.Contexts;
+using InnoShop.UsersManagementService.Api.ExceptionHandlers;
+using InnoShop.UsersManagementService.Application;
+using InnoShop.UsersManagementService.Application.Mappings;
+using InnoShop.UsersManagementService.Domain.Interfaces.Repositories;
+using InnoShop.UsersManagementService.Infrastructure.Persistence;
+using InnoShop.UsersManagementService.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace InnoShop.UsersManagementService.Api;
@@ -10,12 +15,22 @@ public class Program
 
         // Add services to the container.
 
+        builder.Services.AddAutoMapper(typeof(UserProfile));
+
+        builder.Services.AddMediatR(cfg =>
+            cfg.RegisterServicesFromAssemblies(typeof(AssemblyMarker).Assembly));
+
+        builder.Services.AddTransient<IUsersRepository, UsersRepository>();
+
+        RegisterDbContext(builder);
+
         builder.Services.AddControllers();
         builder.Services.AddOpenApi();
 
-        builder.Configuration.AddEnvironmentVariables();
+        builder.Services.AddExceptionHandler<GeneralExceptionHandler>();
+        builder.Services.AddProblemDetails();
 
-        RegisterDbContext(builder);
+        builder.Configuration.AddEnvironmentVariables();
 
         var app = builder.Build();
 

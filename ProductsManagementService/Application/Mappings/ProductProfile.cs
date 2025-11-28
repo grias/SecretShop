@@ -21,5 +21,4 @@ public class ProductProfile : Profile
             .ForMember(dest => dest.Available,
                 opt => opt.Condition(src => src.Available.HasValue));
     }
-
 }
