@@ -44,6 +44,7 @@ public class ProductsRepository : IProductsRepository
 
         return await books
             .FilterByName(queryObject)
+            .FilterByOwnerId(queryObject)
             .Paginate(queryObject).ToListAsync();
     }
 
@@ -56,14 +57,6 @@ public class ProductsRepository : IProductsRepository
         }
 
         return product;
-    }
-
-    public async Task<List<Product>> GetByOwnerId(int id, QueryObject queryObject)
-    {
-        var products = _context.Products.Where(b => b.OwnerId == id).AsQueryable();
-        return await products
-            .FilterByName(queryObject)
-            .Paginate(queryObject).ToListAsync();
     }
 
     public async Task<Product?> UpdateAsync(Product entity)

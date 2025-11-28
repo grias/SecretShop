@@ -18,6 +18,8 @@ public class QueryObject
 
     public string? ProductName { get; set; }
 
+    public int? OwnerId { get; set; }
+
     [DataType(DataType.Date)]
     public DateOnly? Before { get; set; }
 

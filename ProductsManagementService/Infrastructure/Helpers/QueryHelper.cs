@@ -15,14 +15,24 @@ public static class QueryHelper
         return entities;
     }
 
-    public static IQueryable<Product> FilterByName(this IQueryable<Product> authors, QueryObject queryObject)
+    public static IQueryable<Product> FilterByName(this IQueryable<Product> products, QueryObject queryObject)
     {
 
         if (!string.IsNullOrWhiteSpace(queryObject.ProductName))
         {
-            authors = authors.Where(author => author.Name.Contains(queryObject.ProductName));
+            products = products.Where(product => product.Name.Contains(queryObject.ProductName));
         }
 
-        return authors;
+        return products;
+    }
+
+    public static IQueryable<Product> FilterByOwnerId(this IQueryable<Product> products, QueryObject queryObject)
+    {
+        if (queryObject.OwnerId.HasValue)
+        {
+            products = products.Where(product => product.OwnerId == queryObject.OwnerId);
+        }
+
+        return products;
     }
 }
