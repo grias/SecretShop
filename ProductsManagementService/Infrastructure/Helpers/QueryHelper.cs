@@ -35,4 +35,9 @@ public static class QueryHelper
 
         return products;
     }
+
+    public static IQueryable<Product> FilterNotDeleted(this IQueryable<Product> products)
+    {
+        return products.Where(product => product.Deleted == false);
+    }
 }

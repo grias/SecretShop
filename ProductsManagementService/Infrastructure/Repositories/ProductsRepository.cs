@@ -43,6 +43,7 @@ public class ProductsRepository : IProductsRepository
         var books =  _context.Products.AsQueryable();
 
         return await books
+            .FilterNotDeleted()
             .FilterByName(queryObject)
             .FilterByOwnerId(queryObject)
             .Paginate(queryObject).ToListAsync();
@@ -51,7 +52,7 @@ public class ProductsRepository : IProductsRepository
     public async Task<Product?> GetByIdAsync(int id)
     {
         var product = await _context.Products.FindAsync(id);
-        if (product is null)
+        if (product is null || product.Deleted)
         {
             return null;
         }

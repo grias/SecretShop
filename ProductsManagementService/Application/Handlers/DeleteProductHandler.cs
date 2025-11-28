@@ -23,7 +23,6 @@ public class DeleteProductHandler : IRequestHandler<DeleteProductCommand>
             throw new ProductNotFoundException(request.Id);
         }
 
-        await _productsRepository.DeleteAsync(request.Id);
-        return;
+        var deletedProduct = await _productsRepository.DeleteAsync(request.Id);
     }
 }
