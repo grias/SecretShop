@@ -18,6 +18,7 @@ public class ProductsRepository : IProductsRepository
 
     public async Task<Product> CreateAsync(Product entity)
     {
+        entity.CreationDate = DateOnly.FromDateTime(DateTime.Now);
         await _context.Products.AddAsync(entity);
         await _context.SaveChangesAsync();
 
@@ -46,6 +47,7 @@ public class ProductsRepository : IProductsRepository
             .FilterNotDeleted()
             .FilterByName(queryObject)
             .FilterByOwnerId(queryObject)
+            .FilterByCreationDateRange(queryObject)
             .Paginate(queryObject).ToListAsync();
     }
 

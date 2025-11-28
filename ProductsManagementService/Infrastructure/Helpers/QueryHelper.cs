@@ -40,4 +40,21 @@ public static class QueryHelper
     {
         return products.Where(product => product.Deleted == false);
     }
+
+    public static IQueryable<Product> FilterByCreationDateRange(this IQueryable<Product> products, QueryObject queryObject)
+    {
+
+        if (queryObject.After is not null)
+        {
+            products = products.Where(product => product.CreationDate! > queryObject.After);
+        }
+
+        if (queryObject.Before is not null)
+        {
+            var publishingYearBefore = queryObject.Before!.Value.Year;
+            products = products.Where(product => product.CreationDate! < queryObject.Before);
+        }
+
+        return products;
+    }
 }
