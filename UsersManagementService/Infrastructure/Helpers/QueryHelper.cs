@@ -11,9 +11,4 @@ public static class QueryHelper
         entities = entities.Skip(pagesToSkip).Take(queryObject.PageSize);
         return entities;
     }
-
-    public static IQueryable<User> FilterNotDeleted(this IQueryable<User> users)
-    {
-        return users.Where(user => user.Deleted == false);
-    }
 }

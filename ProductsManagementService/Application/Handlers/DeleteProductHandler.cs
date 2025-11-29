@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using InnoShop.ProductsManagementService.Application.Commands;
+﻿using InnoShop.ProductsManagementService.Application.Commands;
 using InnoShop.ProductsManagementService.Domain.Exceptions;
 using InnoShop.ProductsManagementService.Domain.Interfaces.Repositories;
 using MediatR;

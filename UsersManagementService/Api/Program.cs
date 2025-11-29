@@ -2,6 +2,8 @@ using InnoShop.UsersManagementService.Api.ConfigurationHelpers;
 using InnoShop.UsersManagementService.Api.ExceptionHandlers;
 using InnoShop.UsersManagementService.Application;
 using InnoShop.UsersManagementService.Application.Mappings;
+using InnoShop.UsersManagementService.Domain.Interfaces;
+using InnoShop.UsersManagementService.Infrastructure.DeletionManagers;
 using Microsoft.AspNetCore.OpenApi;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
@@ -20,6 +22,11 @@ public class Program
 
         builder.Services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssemblies(typeof(AssemblyMarker).Assembly));
+
+        builder.Services.AddHttpClient<IProductsDeletionManager, ProductDeletionManager>(client =>
+        {
+            client.BaseAddress = new Uri("http://localhost:5030");
+        });
 
         builder.Services.RegisterDi();
 

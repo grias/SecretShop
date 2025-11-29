@@ -1,6 +1,7 @@
 ﻿using InnoShop.UsersManagementService.Domain.Interfaces;
 using InnoShop.UsersManagementService.Domain.Interfaces.Repositories;
 using InnoShop.UsersManagementService.Infrastructure.JwtTokenGenerators;
+using InnoShop.UsersManagementService.Infrastructure.DeletionManagers;
 using InnoShop.UsersManagementService.Infrastructure.PasswordHashers;
 using InnoShop.UsersManagementService.Infrastructure.Persistence;
 using InnoShop.UsersManagementService.Infrastructure.Repositories;

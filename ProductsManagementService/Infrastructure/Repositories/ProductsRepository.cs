@@ -64,6 +64,30 @@ public class ProductsRepository : IProductsRepository
         return product;
     }
 
+    public async Task RecoverByOwnerIdAsync(int ownerId)
+    {
+        var products = _context.Products.Where(p => p.OwnerId == ownerId && p.Deleted);
+
+        foreach (var product in products)
+        {
+            product.Deleted = false;
+        }
+
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task SoftDeleteByOwnerIdAsync(int ownerId)
+    {
+        var products =  _context.Products.Where(p => p.OwnerId == ownerId);
+
+        foreach (var product in products)
+        {
+            product.Deleted = true;
+        }
+
+        await _context.SaveChangesAsync();
+    }
+
     public async Task<Product?> UpdateAsync(Product entity)
     {
         var productToUpdate = await GetByIdAsync(entity.Id);

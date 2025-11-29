@@ -54,6 +54,19 @@ public class UsersController : ControllerBase
         return Ok(createdUser);
     }
 
+    [HttpPost("{id:int}/recover")]
+    public async Task<ActionResult<UserDto>> RecoverById([FromRoute] int id)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        var recoveredUser = await _mediator.Send(new RecoverUserCommand(id));
+
+        return Ok(recoveredUser);
+    }
+
     [HttpPut("{id:int}")]
     public async Task<ActionResult<UserDto>> Update([FromRoute] int id, [FromBody] UpdateUserDto productDto)
     {

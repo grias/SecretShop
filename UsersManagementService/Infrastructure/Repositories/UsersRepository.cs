@@ -27,16 +27,30 @@ public class UsersRepository : IUsersRepository
 
     public async Task<User?> DeleteAsync(int id)
     {
-        var UserToDelete = await GetByIdAsync(id);
-        if (UserToDelete is null)
+        var userToDelete = await GetByIdAsync(id);
+        if (userToDelete is null)
         {
             return null;
         }
 
-        UserToDelete.Deleted = true;
+        userToDelete.Deleted = true;
         await _context.SaveChangesAsync();
 
-        return UserToDelete;
+        return userToDelete;
+    }
+
+    public async Task<User?> RecoverAsync(int id)
+    {
+        var userToRecover = await GetByIdAsync(id);
+        if (userToRecover is null)
+        {
+            return null;
+        }
+
+        userToRecover.Deleted = false;
+        await _context.SaveChangesAsync();
+
+        return userToRecover;
     }
 
     public async Task<List<User>> GetAllAsync(UserQueryObject queryObject)
@@ -44,7 +58,6 @@ public class UsersRepository : IUsersRepository
         var users = _context.Users.AsQueryable();
 
         return await users
-            .FilterNotDeleted()
             .Paginate(queryObject).ToListAsync();
     }
 
@@ -52,7 +65,19 @@ public class UsersRepository : IUsersRepository
     {
         var user = await _context.Users.FindAsync(id);
 
-        if (user is null || user.Deleted)
+        if (user is null)
+        {
+            return null;
+        }
+
+        return user;
+    }
+
+    public async Task<User?> GetByEmailAsync(string email)
+    {
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+
+        if (user is null)
         {
             return null;
         }
@@ -64,7 +89,7 @@ public class UsersRepository : IUsersRepository
     {
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
 
-        if (user is null || user.Deleted)
+        if (user is null)
         {
             return null;
         }

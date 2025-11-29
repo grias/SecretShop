@@ -82,4 +82,22 @@ public class ProductsController : ControllerBase
 
         return NoContent();
     }
+
+    [Authorize(Roles = "Admin")]
+    [HttpDelete("soft-delete/{id:int}")]
+    public async Task<IActionResult> SoftDeleteByOwnerId([FromRoute] int id)
+    {
+        await _mediator.Send(new SoftDeleteProductCommand(id));
+
+        return NoContent();
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpPost("recover/{id:int}")]
+    public async Task<IActionResult> RecoverDeletedByOwnerId([FromRoute] int id)
+    {
+        await _mediator.Send(new RecoverProductsByOwnerIdCommand(id));
+
+        return NoContent();
+    }
 }

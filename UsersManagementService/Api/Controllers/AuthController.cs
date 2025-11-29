@@ -31,4 +31,11 @@ public class AuthController : ControllerBase
         var response = await _mediator.Send(new RegisterCommand(request));
         return Ok(response);
     }
+
+    [HttpPost("forgot-password")]
+    public async Task<ActionResult<RegisterResponseDto>> ForgotPassword([FromBody] RegisterRequestDto request)
+    {
+        var response = await _mediator.Send(new RegisterCommand(request));
+        return Ok(response);
+    }
 }
