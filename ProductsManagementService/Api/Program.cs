@@ -1,13 +1,14 @@
+using FluentValidation;
+using InnoShop.ProductsManagementService.Api.ConfigurationHelpers;
 using InnoShop.ProductsManagementService.Api.ExceptionHandlers;
 using InnoShop.ProductsManagementService.Application;
 using InnoShop.ProductsManagementService.Application.Behaviors;
 using InnoShop.ProductsManagementService.Application.Mappings;
-using InnoShop.ProductsManagementService.Domain.Interfaces.Repositories;
-using InnoShop.ProductsManagementService.Infrastructure.Persistence;
-using InnoShop.ProductsManagementService.Infrastructure.Repositories;
-using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.OpenApi;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi;
+using Scalar.AspNetCore;
 
 namespace InnoShop.ProductsManagementService.Api;
 
@@ -24,9 +25,11 @@ public class Program
         builder.Services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssemblies(typeof(AssemblyMarker).Assembly));
 
-        builder.Services.AddTransient<IProductsRepository, ProductsRepository>();
+        builder.Services.RegisterDi();
 
-        RegisterDbContext(builder);
+        builder.Services.AddCustomAuthentication(builder);
+
+        builder.Services.RegisterDbContext(builder);
 
         builder.Services.AddControllers();
         builder.Services.AddOpenApi();
@@ -37,12 +40,16 @@ public class Program
         builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         builder.Services.AddValidatorsFromAssemblyContaining<AssemblyMarker>();
 
+        builder.Configuration.AddEnvironmentVariables();
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
             app.MapOpenApi();
+
+            app.MapScalarApiReference();
 
             app.UseSwaggerUI(options =>
             {
@@ -54,17 +61,8 @@ public class Program
 
         app.UseAuthorization();
 
-
         app.MapControllers();
 
         app.Run();
-    }
-
-    private static void RegisterDbContext(WebApplicationBuilder builder)
-    {
-        builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        {
-            options.UseSqlServer(builder.Configuration.GetConnectionString("InnoShopProductsManagementServiceDb"));
-        });
     }
 }

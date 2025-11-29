@@ -5,4 +5,4 @@ using MediatR;
 
 namespace InnoShop.ProductsManagementService.Application.Commands;
 
-public record CreateProductCommand(CreateProductDto ProductDto) : IRequest<ProductDto>;
+public record CreateProductCommand(int UserId, CreateProductDto ProductDto) : IRequest<ProductDto>;

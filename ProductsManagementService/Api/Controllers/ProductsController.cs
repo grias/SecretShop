@@ -1,10 +1,13 @@
-﻿using InnoShop.ProductsManagementService.Application.Commands;
+﻿using InnoShop.ProductsManagementService.Api.Filters;
+using InnoShop.ProductsManagementService.Application.Commands;
 using InnoShop.ProductsManagementService.Application.Dtos;
 using InnoShop.ProductsManagementService.Application.Dtos.Requests;
 using InnoShop.ProductsManagementService.Application.Queries;
 using InnoShop.ProductsManagementService.Domain.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace InnoShop.ProductsManagementService.Api.Controllers;
 
@@ -39,6 +42,7 @@ public class ProductsController : ControllerBase
         return Ok(product);
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateProductDto productDto)
     {
@@ -47,11 +51,15 @@ public class ProductsController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        var createdProduct = await _mediator.Send(new CreateProductCommand(productDto));
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        var createdProduct = await _mediator.Send(new CreateProductCommand(int.Parse(userId!), productDto));
 
         return Ok(createdProduct);
     }
 
+    [Authorize]
+    [ServiceFilter(typeof(AuthorizeOwnerFilter))]
     [HttpPut("{id:int}")]
     public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateProductDto productDto)
     {
@@ -65,6 +73,8 @@ public class ProductsController : ControllerBase
         return Ok(updatedProduct);
     }
 
+    [Authorize]
+    [ServiceFilter(typeof(AuthorizeOwnerFilter))]
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteById([FromRoute] int id)
     {

@@ -8,7 +8,7 @@
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "applicationUrl": "http://localhost:5030",
-      "launchUrl": "swagger"
+      "launchUrl": "scalar"
     },
     "https": {
       "commandName": "Project",
