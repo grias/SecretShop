@@ -4,11 +4,13 @@ using InnoShop.UsersManagementService.Application.Dtos.Responses;
 using InnoShop.UsersManagementService.Application.Queries;
 using InnoShop.UsersManagementService.Domain.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InnoShop.UsersManagementService.Api.Controllers;
 
 [Route("api/[controller]")]
+[Authorize]
 [ApiController]
 public class UsersController : ControllerBase
 {
@@ -32,7 +34,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet("{id:int}")]
-    public async Task<IActionResult> GetById([FromRoute] int id)
+    public async Task<ActionResult<UserDto>> GetById([FromRoute] int id)
     {
         var product = await _mediator.Send(new GetUserByIdQuery(id));
 
@@ -40,7 +42,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CreateUserDto productDto)
+    public async Task<ActionResult<UserDto>> Create([FromBody] CreateUserDto productDto)
     {
         if (!ModelState.IsValid)
         {
@@ -53,7 +55,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpPut("{id:int}")]
-    public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateUserDto productDto)
+    public async Task<ActionResult<UserDto>> Update([FromRoute] int id, [FromBody] UpdateUserDto productDto)
     {
         if (!ModelState.IsValid)
         {

@@ -1,10 +1,11 @@
+using InnoShop.UsersManagementService.Api.ConfigurationHelpers;
 using InnoShop.UsersManagementService.Api.ExceptionHandlers;
 using InnoShop.UsersManagementService.Application;
 using InnoShop.UsersManagementService.Application.Mappings;
-using InnoShop.UsersManagementService.Domain.Interfaces.Repositories;
-using InnoShop.UsersManagementService.Infrastructure.Persistence;
-using InnoShop.UsersManagementService.Infrastructure.Repositories;
+using Microsoft.AspNetCore.OpenApi;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi;
+using Scalar.AspNetCore;
 
 namespace InnoShop.UsersManagementService.Api;
 public class Program
@@ -20,9 +21,11 @@ public class Program
         builder.Services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssemblies(typeof(AssemblyMarker).Assembly));
 
-        builder.Services.AddTransient<IUsersRepository, UsersRepository>();
+        builder.Services.RegisterDi();
 
-        RegisterDbContext(builder);
+        builder.Services.AddCustomAuthentication(builder);
+
+        builder.Services.RegisterDbContext(builder);
 
         builder.Services.AddControllers();
         builder.Services.AddOpenApi();
@@ -39,6 +42,8 @@ public class Program
         {
             app.MapOpenApi();
 
+            app.MapScalarApiReference();
+
             app.UseSwaggerUI(options =>
             {
                 options.SwaggerEndpoint("/openapi/v1.json", "v1");
@@ -53,13 +58,4 @@ public class Program
 
         app.Run();
     }
-
-    private static void RegisterDbContext(WebApplicationBuilder builder)
-    {
-        builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        {
-            options.UseSqlServer(builder.Configuration.GetConnectionString("InnoShopUserAuthServiceDb"));
-        });
-    }
 }
-

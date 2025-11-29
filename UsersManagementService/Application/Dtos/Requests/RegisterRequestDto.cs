@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace InnoShop.UsersManagementService.Api.Dtos.Requests;
+namespace InnoShop.UsersManagementService.Application.Dtos.Requests;
 
-public class CreateUserRequest
+public class RegisterRequestDto
 {
     [Required]
     public string Username { get; set; } = string.Empty;

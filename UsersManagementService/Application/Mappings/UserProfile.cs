@@ -18,5 +18,6 @@ public class UserProfile : Profile
                 opt => opt.Condition(src => src.Email is not null))
             .ForMember(dest => dest.Role,
                 opt => opt.Condition(src => src.Role.HasValue));
+        CreateMap<RegisterRequestDto, User>();
     }
 }
