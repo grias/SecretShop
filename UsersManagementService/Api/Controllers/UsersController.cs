@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace InnoShop.UsersManagementService.Api.Controllers;
 
 [Route("api/[controller]")]
-[Authorize]
+[Authorize(Roles = "Admin")]
 [ApiController]
 public class UsersController : ControllerBase
 {
