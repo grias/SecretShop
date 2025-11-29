@@ -2,22 +2,14 @@
 using InnoShop.UsersManagementService.Application.Commands;
 using InnoShop.UsersManagementService.Application.Dtos.Responses;
 using InnoShop.UsersManagementService.Domain.Exceptions;
+using InnoShop.UsersManagementService.Domain.Interfaces;
 using InnoShop.UsersManagementService.Domain.Interfaces.Repositories;
 using MediatR;
 
 namespace InnoShop.UsersManagementService.Application.Handlers;
 
-public class UpdateUserHandler : IRequestHandler<UpdateUserCommand, UserDto>
+public class UpdateUserHandler(IUsersRepository _usersRepository, IMapper _mapper) : IRequestHandler<UpdateUserCommand, UserDto>
 {
-    private readonly IUsersRepository _usersRepository;
-    private readonly IMapper _mapper;
-
-    public UpdateUserHandler(IUsersRepository usersRepository, IMapper mapper)
-    {
-        _usersRepository = usersRepository;
-        _mapper = mapper;
-    }
-
     public async Task<UserDto> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
     {
         var existingUser = await _usersRepository.GetByIdAsync(request.Id);

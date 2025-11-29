@@ -1,19 +1,13 @@
-﻿using InnoShop.ProductsManagementService.Application.Commands;
+﻿using AutoMapper;
+using InnoShop.ProductsManagementService.Application.Commands;
 using InnoShop.ProductsManagementService.Domain.Exceptions;
 using InnoShop.ProductsManagementService.Domain.Interfaces.Repositories;
 using MediatR;
 
 namespace InnoShop.ProductsManagementService.Application.Handlers;
 
-public class DeleteProductHandler : IRequestHandler<DeleteProductCommand>
+public class DeleteProductHandler(IProductsRepository _productsRepository) : IRequestHandler<DeleteProductCommand>
 {
-    private readonly IProductsRepository _productsRepository;
-
-    public DeleteProductHandler(IProductsRepository productsRepository)
-    {
-        _productsRepository = productsRepository;
-    }
-
     public async Task Handle(DeleteProductCommand request, CancellationToken cancellationToken)
     {
         var product = await _productsRepository.GetByIdAsync(request.Id);

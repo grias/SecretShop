@@ -1,24 +1,14 @@
 ﻿using AutoMapper;
 using InnoShop.ProductsManagementService.Application.Commands;
 using InnoShop.ProductsManagementService.Application.Dtos;
-using InnoShop.ProductsManagementService.Domain.Entities;
 using InnoShop.ProductsManagementService.Domain.Exceptions;
 using InnoShop.ProductsManagementService.Domain.Interfaces.Repositories;
 using MediatR;
 
 namespace InnoShop.ProductsManagementService.Application.Handlers;
 
-public class UpdateProductHandler : IRequestHandler<UpdateProductCommand, ProductDto>
+public class UpdateProductHandler(IProductsRepository _productsRepository, IMapper _mapper) : IRequestHandler<UpdateProductCommand, ProductDto>
 {
-    private readonly IProductsRepository _productsRepository;
-    private readonly IMapper _mapper;
-
-    public UpdateProductHandler(IProductsRepository productsRepository, IMapper mapper)
-    {
-        _productsRepository = productsRepository;
-        _mapper = mapper;
-    }
-
     public async Task<ProductDto> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
     {
         var existingProduct = await _productsRepository.GetByIdAsync(request.Id);

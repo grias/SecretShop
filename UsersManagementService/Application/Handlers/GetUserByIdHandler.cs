@@ -7,17 +7,8 @@ using MediatR;
 
 namespace InnoShop.UsersManagementService.Application.Handlers;
 
-public class GetUserByIdHandler : IRequestHandler<GetUserByIdQuery, UserDto>
+public class GetUserByIdHandler(IUsersRepository _usersRepository, IMapper _mapper) : IRequestHandler<GetUserByIdQuery, UserDto>
 {
-    private readonly IUsersRepository _usersRepository;
-    private readonly IMapper _mapper;
-
-    public GetUserByIdHandler(IUsersRepository usersRepository, IMapper mapper)
-    {
-        _usersRepository = usersRepository;
-        _mapper = mapper;
-    }
-
     public async Task<UserDto> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
     {
         var user = await _usersRepository.GetByIdAsync(request.Id);

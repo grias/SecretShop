@@ -7,17 +7,8 @@ using MediatR;
 
 namespace InnoShop.UsersManagementService.Application.Handlers;
 
-public class CreateUserHandler : IRequestHandler<CreateUserCommand, UserDto>
+public class CreateUserHandler(IUsersRepository _usersRepository, IMapper _mapper) : IRequestHandler<CreateUserCommand, UserDto>
 {
-    private readonly IUsersRepository _usersRepository;
-    private readonly IMapper _mapper;
-
-    public CreateUserHandler(IUsersRepository usersRepository, IMapper mapper)
-    {
-        _usersRepository = usersRepository;
-        _mapper = mapper;
-    }
-
     public async Task<UserDto> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
         var userToCreate = _mapper.Map<User>(request.UserDto);
