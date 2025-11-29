@@ -34,7 +34,7 @@ public class ProductsRepository : IProductsRepository
             return null;
         }
 
-        ProductToDelete.Deleted = true;
+        _context.Products.Remove(ProductToDelete);
         await _context.SaveChangesAsync();
 
         return ProductToDelete;
