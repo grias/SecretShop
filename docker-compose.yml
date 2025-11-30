@@ -1,0 +1,48 @@
+version: '3.9'
+
+services:
+  users-api:
+    build:
+      context: .
+      dockerfile: UsersManagementService/Api/Dockerfile
+    ports:
+      - "5001:8080"
+    environment:
+      - ConnectionStrings__InnoShopUserAuthServiceDb=Data Source=users-db;Database=UsersDb;User=sa;Password=${DB_PASSWORD};
+      - InnoShopAuth__Token=${InnoShopAuth__Token}
+      - InnoShopAuth__Issuer=${InnoShopAuth__Issuer}
+      - InnoShopAuth__Audience=${InnoShopAuth__Audience}
+    depends_on:
+      - users-db
+
+  products-api:
+    build:
+      context: .
+      dockerfile: ProductsManagementService/Api/Dockerfile
+    ports:
+      - "5002:8080"
+    environment:
+      - ConnectionStrings__InnoShopProductsManagementServiceDb=Data Source=products-db;Database=ProductsDb;User=sa;Password=${DB_PASSWORD};
+       - InnoShopAuth__Token=${InnoShopAuth__Token}
+       - InnoShopAuth__Issuer=${InnoShopAuth__Issuer}
+       - InnoShopAuth__Audience=${InnoShopAuth__Audience}
+    depends_on:
+      - products-db
+
+  users-db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: users-db
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=${DB_PASSWORD}
+
+  products-db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: products-db
+    ports:
+      - "1434:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=${DB_PASSWORD}

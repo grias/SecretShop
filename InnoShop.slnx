@@ -1,4 +1,8 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".env" />
+    <File Path="docker-compose.yml" />
+  </Folder>
   <Project Path="ProductsManagementService/Api/InnoShop.ProductsManagementService.Api.csproj" Id="498c0844-6839-484f-8e81-6d0600846282" />
   <Project Path="ProductsManagementService/Application/InnoShop.ProductsManagementService.Application.csproj" Id="460c2b9c-7b65-4c03-8269-c51d8bf20236" />
   <Project Path="ProductsManagementService/Domain/InnoShop.ProductsManagementService.Domain.csproj" Id="eccea812-0960-45c1-bf58-ed724b440019" />
