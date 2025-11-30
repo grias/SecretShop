@@ -4,6 +4,7 @@ using InnoShop.UsersManagementService.Application;
 using InnoShop.UsersManagementService.Application.Mappings;
 using InnoShop.UsersManagementService.Domain.Interfaces;
 using InnoShop.UsersManagementService.Infrastructure.DeletionManagers;
+using InnoShop.UsersManagementService.Infrastructure.Persistence;
 using Microsoft.AspNetCore.OpenApi;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
@@ -43,6 +44,12 @@ public class Program
         builder.Configuration.AddEnvironmentVariables();
 
         var app = builder.Build();
+
+        using (var scope = app.Services.CreateScope())
+        {
+            var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            db.Database.Migrate();
+        }
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())

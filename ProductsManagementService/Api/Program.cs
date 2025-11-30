@@ -4,6 +4,7 @@ using InnoShop.ProductsManagementService.Api.ExceptionHandlers;
 using InnoShop.ProductsManagementService.Application;
 using InnoShop.ProductsManagementService.Application.Behaviors;
 using InnoShop.ProductsManagementService.Application.Mappings;
+using InnoShop.ProductsManagementService.Infrastructure.Persistence;
 using MediatR;
 using Microsoft.AspNetCore.OpenApi;
 using Microsoft.EntityFrameworkCore;
@@ -43,6 +44,12 @@ public class Program
         builder.Configuration.AddEnvironmentVariables();
 
         var app = builder.Build();
+
+        using (var scope = app.Services.CreateScope())
+        {
+            var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            db.Database.Migrate();
+        }
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())

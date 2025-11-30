@@ -1,5 +1,4 @@
-﻿
-using InnoShop.UsersManagementService.Domain.Entities;
+﻿using InnoShop.UsersManagementService.Domain.Entities;
 using InnoShop.UsersManagementService.Domain.Enumerators;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,8 +25,8 @@ public class ApplicationDbContext : DbContext
     private static void PopulateWithInitialSeedUsersTable(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<User>().HasData(
-                    new User { Id = 1, Username = "admin", PasswordHash = "123", Deleted = false, Email = "adm@mail.com", Role = UserRoles.Admin},
-                    new User { Id = 2, Username = "bob", PasswordHash = "123", Deleted = false, Email = "bob@mail.com", Role = UserRoles.User}
+                    new User { Id = 1, Username = "admin", PasswordHash = "AQAAAAIAAYagAAAAELBP2YqONBRad16yZl0cpTFc306nVTNmZ94PptJ1yAWfzMywWC8AUluuDGxZfvJAmw==", Deleted = false, Email = "adm@mail.com", Role = UserRoles.Admin},
+                    new User { Id = 2, Username = "bob", PasswordHash = "AQAAAAIAAYagAAAAELBP2YqONBRad16yZl0cpTFc306nVTNmZ94PptJ1yAWfzMywWC8AUluuDGxZfvJAmw==", Deleted = false, Email = "bob@mail.com", Role = UserRoles.User}
                 );
     }
 }

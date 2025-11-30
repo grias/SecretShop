@@ -37,8 +37,8 @@ namespace InnoShop.ProductsManagementService.Infrastructure.Persistence.Migratio
                 columns: new[] { "Id", "Available", "CreationDate", "Deleted", "Description", "Name", "OwnerId", "Price" },
                 values: new object[,]
                 {
-                    { 1, true, new DateOnly(2025, 11, 24), false, "Desc1", "Prod1", 1, 10m },
-                    { 2, true, new DateOnly(2025, 11, 24), false, "Desc2", "Prod2", 2, 20m }
+                    { 1, true, new DateOnly(2025, 11, 30), false, "Desc1", "Prod1", 1, 10m },
+                    { 2, true, new DateOnly(2025, 11, 30), false, "Desc2", "Prod2", 2, 20m }
                 });
         }
 
