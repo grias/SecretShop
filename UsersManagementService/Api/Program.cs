@@ -59,6 +59,8 @@ public class Program
             app.MapScalarApiReference();
         }
 
+        app.UseExceptionHandler();
+
         app.UseAuthorization();
 
         app.MapControllers();
