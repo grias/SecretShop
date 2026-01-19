@@ -3,12 +3,12 @@
     <File Path=".env" />
     <File Path="docker-compose.yml" />
   </Folder>
-  <Project Path="ProductsManagementService/Api/InnoShop.ProductsManagementService.Api.csproj" Id="498c0844-6839-484f-8e81-6d0600846282" />
-  <Project Path="ProductsManagementService/Application/InnoShop.ProductsManagementService.Application.csproj" Id="460c2b9c-7b65-4c03-8269-c51d8bf20236" />
-  <Project Path="ProductsManagementService/Domain/InnoShop.ProductsManagementService.Domain.csproj" Id="eccea812-0960-45c1-bf58-ed724b440019" />
-  <Project Path="ProductsManagementService/Infrastructure/InnoShop.ProductsManagementService.Infrastructure.csproj" Id="2749e0be-a378-4331-a7d7-ea1a60bec76d" />
-  <Project Path="UsersManagementService/Api/InnoShop.UsersManagementService.Api.csproj" />
-  <Project Path="UsersManagementService/Application/InnoShop.UsersManagementService.Application.csproj" Id="3d2ac19f-21f3-4517-8979-cad75bb18f16" />
-  <Project Path="UsersManagementService/Domain/InnoShop.UsersManagementService.Domain.csproj" Id="bfa27b41-9591-4fb9-a57a-391c786b5dbb" />
-  <Project Path="UsersManagementService/Infrastructure/InnoShop.UsersManagementService.Infrastructure.csproj" Id="f6cb1c08-ad25-49d5-be8c-c61e9f34d91e" />
+  <Project Path="src/ProductsManagementService/Api/InnoShop.ProductsManagementService.Api.csproj" Id="498c0844-6839-484f-8e81-6d0600846282" />
+  <Project Path="src/ProductsManagementService/Application/InnoShop.ProductsManagementService.Application.csproj" Id="460c2b9c-7b65-4c03-8269-c51d8bf20236" />
+  <Project Path="src/ProductsManagementService/Domain/InnoShop.ProductsManagementService.Domain.csproj" Id="eccea812-0960-45c1-bf58-ed724b440019" />
+  <Project Path="src/ProductsManagementService/Infrastructure/InnoShop.ProductsManagementService.Infrastructure.csproj" Id="2749e0be-a378-4331-a7d7-ea1a60bec76d" />
+  <Project Path="src/UsersManagementService/Api/InnoShop.UsersManagementService.Api.csproj" />
+  <Project Path="src/UsersManagementService/Application/InnoShop.UsersManagementService.Application.csproj" Id="3d2ac19f-21f3-4517-8979-cad75bb18f16" />
+  <Project Path="src/UsersManagementService/Domain/InnoShop.UsersManagementService.Domain.csproj" Id="bfa27b41-9591-4fb9-a57a-391c786b5dbb" />
+  <Project Path="src/UsersManagementService/Infrastructure/InnoShop.UsersManagementService.Infrastructure.csproj" Id="f6cb1c08-ad25-49d5-be8c-c61e9f34d91e" />
 </Solution>

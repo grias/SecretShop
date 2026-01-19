@@ -47,6 +47,6 @@ public static class Configurations
         services.AddTransient<IUsersRepository, UsersRepository>();
         services.AddTransient<IPasswordHasher, CustomPasswordHasher>();
         services.AddTransient<IJwtTokenGenerator, JwtTokenGenerator>();
+        services.AddTransient<IRecoveryTokenGenerator, IRecoveryTokenGenerator>();
     }
-
 }
