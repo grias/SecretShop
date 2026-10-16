@@ -1,7 +1,8 @@
 ﻿using InnoShop.UsersManagementService.Domain.Interfaces;
 using InnoShop.UsersManagementService.Domain.Interfaces.Repositories;
-using InnoShop.UsersManagementService.Infrastructure.JwtTokenGenerators;
 using InnoShop.UsersManagementService.Infrastructure.DeletionManagers;
+using InnoShop.UsersManagementService.Infrastructure.EmailSenders;
+using InnoShop.UsersManagementService.Infrastructure.JwtTokenGenerators;
 using InnoShop.UsersManagementService.Infrastructure.PasswordHashers;
 using InnoShop.UsersManagementService.Infrastructure.Persistence;
 using InnoShop.UsersManagementService.Infrastructure.Repositories;
@@ -47,6 +48,8 @@ public static class Configurations
         services.AddTransient<IUsersRepository, UsersRepository>();
         services.AddTransient<IPasswordHasher, CustomPasswordHasher>();
         services.AddTransient<IJwtTokenGenerator, JwtTokenGenerator>();
-        services.AddTransient<IRecoveryTokenGenerator, IRecoveryTokenGenerator>();
+        services.AddTransient<IRecoveryTokenGenerator, JwtPasswordRecoveryTokenService>();
+        services.AddTransient<IRecoveryTokenValidator, JwtPasswordRecoveryTokenService>();
+        services.AddTransient<IPasswordRecoveryEmailSender, PasswordRecoveryEmailSender>();
     }
 }

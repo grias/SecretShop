@@ -6,20 +6,18 @@ using MediatR;
 
 namespace InnoShop.UsersManagementService.Application.Handlers;
 
-public class ForgotPasswordHandler(IUsersRepository _usersRepository) : IRequestHandler<ForgotPasswordCommand>
+public class ForgotPasswordHandler(IUsersRepository _usersRepository, IRecoveryTokenGenerator _recoveryTokenGenerator, IPasswordRecoveryEmailSender _emailSender) : IRequestHandler<ForgotPasswordCommand>
 {
     public async Task Handle(ForgotPasswordCommand request, CancellationToken cancellationToken)
     {
         var user = await _usersRepository.GetByEmailAsync(request.Dto.Email);
         if (user is null)
         {
-            throw new UserNotFoundException();
+            throw new EmailNotFoundException(request.Dto.Email);
         }
 
-        var token = _jwtTokenGenerator.GenerateToken(user);
+        var token = _recoveryTokenGenerator.GenerateToken(user);
 
-        var result = _emailSender.SendEmail(token, request.Dto.Email);
-
-        return result;
+        _emailSender.SendEmail(token, request.Dto.Email);
     }
 }

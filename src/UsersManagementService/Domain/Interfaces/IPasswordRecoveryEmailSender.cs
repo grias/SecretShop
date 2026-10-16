@@ -2,5 +2,5 @@
 
 public interface IPasswordRecoveryEmailSender
 {
-    bool SendEmail(string token, string email);
+    void SendEmail(string token, string email);
 }

@@ -4,8 +4,8 @@ namespace InnoShop.UsersManagementService.Infrastructure.EmailSenders;
 
 public class PasswordRecoveryEmailSender : IPasswordRecoveryEmailSender
 {
-    public bool SendEmail(string token, string email)
+    public void SendEmail(string token, string email)
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"Recovery token sent to email: {email}!\n{token}");
     }
 }

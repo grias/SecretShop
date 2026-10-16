@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace InnoShop.ProductsManagementService.Infrastructure.Persistence.Migrations
+namespace InnoShop.ProductsManagementService.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -37,8 +37,8 @@ namespace InnoShop.ProductsManagementService.Infrastructure.Persistence.Migratio
                 columns: new[] { "Id", "Available", "CreationDate", "Deleted", "Description", "Name", "OwnerId", "Price" },
                 values: new object[,]
                 {
-                    { 1, true, new DateOnly(2025, 11, 30), false, "Desc1", "Prod1", 1, 10m },
-                    { 2, true, new DateOnly(2025, 11, 30), false, "Desc2", "Prod2", 2, 20m }
+                    { 1, true, new DateOnly(2026, 10, 15), false, "Desc1", "Prod1", 1, 10m },
+                    { 2, true, new DateOnly(2026, 10, 15), false, "Desc2", "Prod2", 2, 20m }
                 });
         }
 

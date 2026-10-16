@@ -1,6 +1,9 @@
-﻿namespace InnoShop.UsersManagementService.Application.Dtos.Requests;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace InnoShop.UsersManagementService.Application.Dtos.Requests;
 
 public class ForgotPasswordRequestDto
 {
-    public string Email { get; set; }
+    [Required]
+    public string Email { get; set; } = string.Empty;
 }

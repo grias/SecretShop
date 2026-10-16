@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace InnoShop.ProductsManagementService.Infrastructure.Persistence.Migrations
+namespace InnoShop.ProductsManagementService.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251130131804_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20261015130124_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -66,7 +66,7 @@ namespace InnoShop.ProductsManagementService.Infrastructure.Persistence.Migratio
                         {
                             Id = 1,
                             Available = true,
-                            CreationDate = new DateOnly(2025, 11, 30),
+                            CreationDate = new DateOnly(2026, 10, 15),
                             Deleted = false,
                             Description = "Desc1",
                             Name = "Prod1",
@@ -77,7 +77,7 @@ namespace InnoShop.ProductsManagementService.Infrastructure.Persistence.Migratio
                         {
                             Id = 2,
                             Available = true,
-                            CreationDate = new DateOnly(2025, 11, 30),
+                            CreationDate = new DateOnly(2026, 10, 15),
                             Deleted = false,
                             Description = "Desc2",
                             Name = "Prod2",
