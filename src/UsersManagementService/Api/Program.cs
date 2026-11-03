@@ -41,6 +41,16 @@ public class Program
         builder.Services.AddExceptionHandler<GeneralExceptionHandler>();
         builder.Services.AddProblemDetails();
 
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("BlazorCorsPolicy", policy =>
+            {
+                policy.WithOrigins("https://localhost:7094")
+                      .AllowAnyHeader()
+                      .AllowAnyMethod();
+            });
+        });
+
         builder.Configuration.AddEnvironmentVariables();
 
         var app = builder.Build();
@@ -58,6 +68,8 @@ public class Program
 
             app.MapScalarApiReference();
         }
+
+        app.UseCors("BlazorCorsPolicy");
 
         app.UseExceptionHandler();
 

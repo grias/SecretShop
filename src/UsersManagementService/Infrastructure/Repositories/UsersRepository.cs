@@ -109,6 +109,7 @@ public class UsersRepository : IUsersRepository
         userToUpdate.Username = entity.Username;
         userToUpdate.Email = entity.Email;
         userToUpdate.Role = entity.Role;
+        userToUpdate.PasswordHash = entity.PasswordHash;
 
         await _context.SaveChangesAsync();
 

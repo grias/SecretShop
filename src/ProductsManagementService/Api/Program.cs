@@ -41,6 +41,16 @@ public class Program
         builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         builder.Services.AddValidatorsFromAssemblyContaining<AssemblyMarker>();
 
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("BlazorCorsPolicy", policy =>
+            {
+                policy.WithOrigins("https://localhost:7094")
+                      .AllowAnyHeader()
+                      .AllowAnyMethod();
+            });
+        });
+
         builder.Configuration.AddEnvironmentVariables();
 
         var app = builder.Build();
@@ -48,7 +58,7 @@ public class Program
         using (var scope = app.Services.CreateScope())
         {
             var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-            db.Database.Migrate();
+            //db.Database.Migrate();
         }
 
         // Configure the HTTP request pipeline.
@@ -58,6 +68,8 @@ public class Program
 
             app.MapScalarApiReference();
         }
+
+        app.UseCors("BlazorCorsPolicy");
 
         app.UseExceptionHandler();
 

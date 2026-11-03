@@ -63,7 +63,7 @@ namespace InnoShop.ProductsManagementService.Infrastructure.Migrations
                         {
                             Id = 1,
                             Available = true,
-                            CreationDate = new DateOnly(2026, 10, 15),
+                            CreationDate = new DateOnly(2026, 10, 16),
                             Deleted = false,
                             Description = "Desc1",
                             Name = "Prod1",
@@ -74,7 +74,7 @@ namespace InnoShop.ProductsManagementService.Infrastructure.Migrations
                         {
                             Id = 2,
                             Available = true,
-                            CreationDate = new DateOnly(2026, 10, 15),
+                            CreationDate = new DateOnly(2026, 10, 16),
                             Deleted = false,
                             Description = "Desc2",
                             Name = "Prod2",

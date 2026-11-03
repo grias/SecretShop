@@ -40,9 +40,9 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("restore-password")]
-    public async Task<IActionResult> RestorePassword([FromBody] RegisterRequestDto request)
+    public async Task<IActionResult> RestorePassword([FromBody] ResetPasswordRequestDto request)
     {
-        var response = await _mediator.Send(new RegisterCommand(request));
+        var response = await _mediator.Send(new ResetPasswordCommand(request));
         return Ok();
     }
 }

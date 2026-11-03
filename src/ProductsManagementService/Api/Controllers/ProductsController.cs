@@ -30,8 +30,8 @@ public class ProductsController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        var books = await _mediator.Send(new GetAllProductsQuery(queryObject));
-        return Ok(books);
+        var products = await _mediator.Send(new GetAllProductsQuery(queryObject));
+        return Ok(products);
     }
 
     [HttpGet("{id:int}")]

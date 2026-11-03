@@ -29,16 +29,16 @@ public class UsersController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        var books = await _mediator.Send(new GetAllUsersQuery(queryObject));
-        return Ok(books);
+        var users = await _mediator.Send(new GetAllUsersQuery(queryObject));
+        return Ok(users);
     }
 
     [HttpGet("{id:int}")]
     public async Task<ActionResult<UserDto>> GetById([FromRoute] int id)
     {
-        var product = await _mediator.Send(new GetUserByIdQuery(id));
+        var user = await _mediator.Send(new GetUserByIdQuery(id));
 
-        return Ok(product);
+        return Ok(user);
     }
 
     [HttpPost]
